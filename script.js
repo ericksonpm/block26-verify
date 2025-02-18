@@ -40,6 +40,7 @@ function clearForm() {
     document.getElementById('retired').value = 'no';
     document.getElementById('rank').value = 'o3';
     document.getElementById('serviceYears').value = '';
+    document.getElementById('retirementType').value = 'nonMedical'; // Added
     document.getElementById('disability').value = '0';
     document.getElementById('result').textContent = '';
 }
