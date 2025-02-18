@@ -1,66 +1,41 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SF-50 Block 26 Checker</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>SF-50 Block 26 Verification</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>SF-50 Block 26 Verification</h1>
-        
-        <div class="form-step">
-            <label for="retired">Did you retire from military service?</label>
-            <select id="retired" aria-describedby="retiredHelp">
-                <option value="no">No</option>
+        <h1>SF-50 Block 26 Validator</h1>
+        <div class="form-group">
+            <label for="veteranStatus">Are you a veteran?</label>
+            <select id="veteranStatus">
                 <option value="yes">Yes</option>
-            </select>
-            <div id="retiredHelp" class="sr-only">Affects retirement type eligibility requirements</div>
-        </div>
-
-        <div class="form-step" id="retirementTypeSection" style="display: none;">
-            <label for="retirementType">Retirement type:</label>
-            <select id="retirementType">
-                <option value="nonMedical">Non-Medical (Length of Service)</option>
-                <option value="medical">Medical Retirement</option>
+                <option value="no">No</option>
             </select>
         </div>
-
-        <div class="form-step" id="rankSection" style="display: none;">
-            <label for="rank">Highest retired rank:</label>
-            <select id="rank">
-                <option value="o3">O-3/Captain or below</option>
-                <option value="o4">O-4/Major or above</option>
+        <div class="form-group">
+            <label for="retiredMilitary">Did you retire from military service?</label>
+            <select id="retiredMilitary">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
             </select>
         </div>
-
-        <div class="form-step" id="serviceYearsSection" style="display: none;">
-            <label for="serviceYears">Total active service years:</label>
-            <input type="number" id="serviceYears" min="0" max="40" required
-                   aria-describedby="yearsHelp">
-            <div id="yearsHelp" class="sr-only">Enter whole years between 0-40</div>
+        <button onclick="checkBlock26()">Verify Block 26</button>
+        <div id="result"></div>
+        <div class="guidance">
+            <h2>Official Guidance Reference</h2>
+            <p>According to government documentation [6][7]:</p>
+            <ul>
+                <li>Block 26 shows veteran preference eligibility for RIF (Reduction in Force)</li>
+                <li>Retired military members <strong>do not</strong> receive preference</li>
+                <li>Non-retired veterans <strong>do</strong> receive preference</li>
+            </ul>
         </div>
-
-        <div class="form-step">
-            <label for="disability">VA disability rating:</label>
-            <select id="disability">
-                <option value="0">0%</option>
-                <option value="30">30-100%</option>
-            </select>
-        </div>
-
-        <div class="button-group">
-            <button type="button" id="checkBtn">Check Status</button>
-            <button type="button" id="clearBtn">Clear</button>
-        </div>
-
-    <div id="result" role="status" aria-live="polite">
-    <span class="message-content"></span>
-    <button class="close-alert" aria-label="Close message" 
-            onclick="this.parentElement.classList.add('hidden')">&times;</button>
-</div>
-
-    <script src="/script.js" defer></script>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
