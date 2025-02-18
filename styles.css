@@ -178,6 +178,33 @@ footer.privacy-statement a:hover {
     text-decoration: underline;
 }
 
+/* Add these new styles */
+.derivative-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px dashed #dee2e6;
+}
+
+.derivative-section h3 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* Keep all previous styles and add: */
+.privacy-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.privacy-link:hover {
+    text-decoration: underline;
+}
+
 html {
     scroll-behavior: smooth;
 }
+
