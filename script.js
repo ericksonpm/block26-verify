@@ -88,4 +88,9 @@ function checkEligibility() {
                 <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a></li>
                 ${formValues.retirementRank === 'o4-plus' ? 
                 '<li><a href="https://www.law.cornell.edu/uscode/text/5/2108#a_3_D" target="_blank">5 U.S.C. 2108(3)(D)</a></li>' : ''}
-                <li><a href
+                <li><a href="https://www.ecfr.gov/current/title-5/chapter-I/subchapter-B/part-752/subpart-C/section-752.402#p-752.402(c)(3)" target="_blank">5 CFR 752.402(c)(3)</a></li>
+            </ul>
+        </div>
+    `;
+    resultDiv.style.display = 'block';
+}
