@@ -34,3 +34,14 @@ button {
     padding: 15px;
     border-radius: 5px;
 }
+
+/* Add to styles.css */
+#retirementTypeSection {
+    transition: opacity 0.3s ease;
+}
+
+#retirementType:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
