@@ -3,6 +3,7 @@ function checkEligibility() {
     const rank = document.getElementById('rank').value;
     const serviceYears = parseInt(document.getElementById('serviceYears').value);
     const disability = parseInt(document.getElementById('disability').value);
+    const retirementType = document.getElementById('retirementType').value; // NEW LINE
 
     let resultText = '';
     let resultClass = '';
