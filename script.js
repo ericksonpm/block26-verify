@@ -1,6 +1,5 @@
 // script.js
 function checkEligibility() {
-    const serviceBranch = document.getElementById('serviceBranch').value;
     const dischargeType = document.getElementById('dischargeType').value;
     const retirementStatus = document.getElementById('retirementStatus').value;
     const retirementRank = document.getElementById('retirementRank').value;
