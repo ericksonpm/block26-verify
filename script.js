@@ -40,10 +40,13 @@ function clearForm() {
     document.getElementById('retired').value = 'no';
     document.getElementById('rank').value = 'o3';
     document.getElementById('serviceYears').value = '';
-    document.getElementById('retirementType').value = 'nonMedical'; // Added
+    document.getElementById('retirementType').value = 'nonMedical';
     document.getElementById('disability').value = '0';
     document.getElementById('result').textContent = '';
-}
+    
+    // Reset retirement type UI
+    document.getElementById('retirementTypeSection').style
+
 // Add this at the bottom of script.js
 document.getElementById('retired').addEventListener('change', function() {
     const retirementSection = document.getElementById('retirementTypeSection');
