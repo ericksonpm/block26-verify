@@ -6,8 +6,44 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Your existing form structure -->
-    <div id="result"></div>
+    <div class="container">
+        <h1>SF-50 Block 26 Verification</h1>
+        
+        <div class="form-step">
+            <label>Did you retire from military service?</label>
+            <select id="retired">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-step" id="rankSection">
+            <label>Highest retired rank:</label>
+            <select id="rank">
+                <option value="o3">O-3/Captain or below</option>
+                <option value="o4">O-4/Major or above</option>
+            </select>
+        </div>
+
+        <div class="form-step" id="serviceYearsSection">
+            <label>Total active service years:</label>
+            <input type="number" id="serviceYears" min="0" max="40">
+        </div>
+
+        <div class="form-step">
+            <label>VA disability rating:</label>
+            <select id="disability">
+                <option value="0">0%</option>
+                <option value="30">30-100%</option>
+            </select>
+        </div>
+
+        <button onclick="checkEligibility()">Check Status</button>
+        <button onclick="clearForm()">Clear</button>
+
+        <div id="result"></div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
