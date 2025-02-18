@@ -63,6 +63,14 @@ if (formValues.campaignService === 'none') {
         }
     }
 
+    // Check Reservist Eligibility
+if (formValues.retirementStatus === 'none' && formValues.campaignService === 'none') {
+    disqualifiers.push("Reservists performing weekend drills or annual training are not eligible unless called to active duty under Title 10.");
+} else if (formValues.retirementStatus === 'regular' && formValues.retirementRank === 'none') {
+    disqualifiers.push("Retired reservists drawing pay at age 60 must meet additional criteria.");
+}
+
+    
     // Final Determination
     isEligible = disqualifiers.length === 0 && reasons.length > 0;
 
