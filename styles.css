@@ -65,3 +65,29 @@ button:hover {
     padding: 20px;
     border-radius: 4px;
 }
+
+/* styles.css */
+.note {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.legal-reference a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.legal-reference a:hover {
+    text-decoration: underline;
+}
+
+#result.eligible {
+    background-color: #d4edda;
+    border: 1px solid #28a745;
+}
+
+#result.ineligible {
+    background-color: #f8d7da;
+    border: 1px solid #dc3545;
+}
+
