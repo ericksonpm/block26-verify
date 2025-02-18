@@ -10,29 +10,80 @@
 <body>
     <div class="container">
         <h1>SF-50 Block 26 Validator</h1>
-        <div class="form-group">
-            <label for="veteranStatus">Are you a veteran?</label>
-            <select id="veteranStatus">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+        <div class="form-section">
+            <div class="form-group">
+                <label for="serviceBranch">Military Service Branch:</label>
+                <select id="serviceBranch">
+                    <option value="none">Not Applicable</option>
+                    <option value="army">Army</option>
+                    <option value="navy">Navy</option>
+                    <option value="air-force">Air Force</option>
+                    <option value="marines">Marines</option>
+                    <option value="coast-guard">Coast Guard</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dischargeType">Discharge Type:</label>
+                <select id="dischargeType">
+                    <option value="none">Not Applicable</option>
+                    <option value="honorable">Honorable</option>
+                    <option value="general">General</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="retirementStatus">Military Retirement Status:</label>
+                <select id="retirementStatus">
+                    <option value="none">Not Retired</option>
+                    <option value="medical">Medical Retirement</option>
+                    <option value="regular">Regular Retirement</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="retirementRankGroup">
+                <label for="retirementRank">Highest Retirement Rank:</label>
+                <select id="retirementRank">
+                    <option value="none">N/A</option>
+                    <option value="e1-e9">E-1 to E-9</option>
+                    <option value="o1-o3">O-1 to O-3</option>
+                    <option value="o4-plus">O-4 (Major/Lt Commander) or Higher</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="disabilityRating">VA Disability Rating:</label>
+                <select id="disabilityRating">
+                    <option value="0">0%</option>
+                    <option value="10">10-20%</option>
+                    <option value="30">30% or Higher</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="servicePeriod">Qualifying Service Period:</label>
+                <select id="servicePeriod">
+                    <option value="none">None</option>
+                    <option value="gulf-war">Gulf War (1990-1992)</option>
+                    <option value="post-911">Post-9/11 Service</option>
+                    <option value="other-campaign">Other Campaign Badge</option>
+                </select>
+            </div>
+
+            <button onclick="checkEligibility()">Verify Eligibility</button>
         </div>
-        <div class="form-group">
-            <label for="retiredMilitary">Did you retire from military service?</label>
-            <select id="retiredMilitary">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <button onclick="checkBlock26()">Verify Block 26</button>
+
         <div id="result"></div>
-        <div class="guidance">
-            <h2>Official Guidance Reference</h2>
-            <p>According to government documentation [6][7]:</p>
+        
+        <div class="legal-reference">
+            <h2>Eligibility Criteria Reference</h2>
+            <p>Based on 5 U.S.C. 2108 and OPM guidelines [2][4][7]:</p>
             <ul>
-                <li>Block 26 shows veteran preference eligibility for RIF (Reduction in Force)</li>
-                <li>Retired military members <strong>do not</strong> receive preference</li>
-                <li>Non-retired veterans <strong>do</strong> receive preference</li>
+                <li>Retired officers O-4+ ineligible unless disabled (30%+) [4]</li>
+                <li>Requires minimum 180-day qualifying service [1]</li>
+                <li>Medical retirees treated differently than regular retirees [4]</li>
+                <li>30%+ disability grants 10-point preference [3]</li>
             </ul>
         </div>
     </div>
