@@ -91,6 +91,52 @@ if (formValues.retirementStatus === 'none' && formValues.campaignService === 'no
             <h4>Disqualifying Factors:</h4>
             <ul>${disqualifiers.map(d => `<li>${d}</li>`).join('')}</ul>
         </div>` : ''}
+
+       // Toggle derivative details visibility
+document.getElementById('derivativePreference').addEventListener('change', function() {
+    document.getElementById('derivativeDetails').style.display = 
+        this.value !== 'none' ? 'block' : 'none';
+});
+
+// Derivative preference checks
+function checkDerivativeEligibility(formValues) {
+    const derivativeType = formValues.derivativePreference;
+    const servicePeriod = formValues.veteranServicePeriod;
+    const dischargeType = formValues.veteranDischargeType;
+    
+    let isEligible = false;
+    const reasons = [];
+    const disqualifiers = [];
+
+    if (derivativeType !== 'none') {
+        // Common requirement: Honorable discharge
+        if (dischargeType !== 'honorable') {
+            disqualifiers.push("Veteran must have had an honorable discharge");
+        }
+
+        // Specific checks
+        switch(derivativeType) {
+            case 'widow':
+                if (servicePeriod === 'none') disqualifiers.push("Veteran must have served in a campaign");
+                else reasons.push("Unmarried widow/widower of campaign veteran");
+                break;
+            case 'spouse-disabled':
+                reasons.push("Spouse of service-connected disabled veteran unable to work");
+                break;
+            case 'mother-deceased':
+                reasons.push("Mother of veteran who died in war/campaign");
+                break;
+            case 'mother-disabled':
+                reasons.push("Mother of permanently disabled veteran");
+                break;
+        }
+
+        isEligible = disqualifiers.length === 0;
+    }
+
+    return { isEligible, reasons, disqualifiers };
+}
+
         
         <div class="legal-refs">
             <h4>Legal References:</h4>
