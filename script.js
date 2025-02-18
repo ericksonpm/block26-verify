@@ -89,10 +89,20 @@ function toggleServiceRequirements() {
   form.serviceYears.required = needsServiceYears;
 }
 
-function displayResult(text, className = '') {
-  form.result.textContent = text;
-  form.result.className = className;
+// displayResult(text, className = '') {
+//  form.result.textContent = text;
+//  form.result.className = className;
+//}
+
+function displayResult(text, className) {
+    const resultDiv = document.getElementById('result');
+    const messageContent = resultDiv.querySelector('.message-content');
+    
+    messageContent.textContent = text;
+    resultDiv.className = className;
+    resultDiv.classList.remove('hidden');
 }
+
 
 function clearForm() {
   // Reset values
