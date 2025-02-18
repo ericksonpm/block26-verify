@@ -55,8 +55,11 @@
             <button type="button" id="clearBtn">Clear</button>
         </div>
 
-        <div id="result" role="status" aria-live="polite"></div>
-    </div>
+    <div id="result" role="status" aria-live="polite">
+    <span class="message-content"></span>
+    <button class="close-alert" aria-label="Close message" 
+            onclick="this.parentElement.classList.add('hidden')">&times;</button>
+</div>
 
     <script src="/script.js" defer></script>
 </body>
