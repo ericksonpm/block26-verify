@@ -1,97 +1,79 @@
-/* Accessibility & New Features */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+/* Existing styles */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.button-group {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-/* Enhanced Existing Styles */
 .form-step {
     margin: 15px 0;
-    padding: 15px;
+    padding: 10px;
     background: #f5f5f5;
     border-radius: 5px;
-    transition: all 0.3s ease;
 }
 
-.form-step label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-/* Conditional Sections */
-#retirementTypeSection,
-#rankSection,
-#serviceYearsSection {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-#retirementTypeSection.visible,
-#rankSection.visible,
-#serviceYearsSection.visible {
-    display: block;
-    opacity: 1;
-}
-
-/* Improved Form Controls */
-input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: white;
-}
-
-/* Enhanced Button States */
 button {
-    margin: 0;
-    padding: 12px 24px;
+    margin: 10px 5px;
+    padding: 10px 20px;
     background: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
-button:hover {
-    background: #0056b3;
+#retirementTypeSection {
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
 }
 
-/* Result Display */
 #result {
     margin-top: 20px;
     padding: 15px;
-    border-radius: 4px;
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
+    border-radius: 5px;
 }
 
-/* Focus States for Accessibility */
-select:focus,
-input:focus,
-button:focus {
-    outline: 2px solid #007bff;
-    outline-offset: 2px;
+/* New alert classes */
+.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    display: none; /* Hidden by default */
+}
+
+/* Animation for alerts */
+#result {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+#result.hidden {
+    opacity: 0;
+}
+
+/* Close button styling */
+.close-alert {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-left: 15px;
+}
+
+.close-alert:hover {
+    color: #000;
 }
