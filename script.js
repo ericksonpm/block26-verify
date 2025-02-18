@@ -44,3 +44,17 @@ function clearForm() {
     document.getElementById('disability').value = '0';
     document.getElementById('result').textContent = '';
 }
+// Add this at the bottom of script.js
+document.getElementById('retired').addEventListener('change', function() {
+    const retirementSection = document.getElementById('retirementTypeSection');
+    const retirementSelect = document.getElementById('retirementType');
+    
+    if (this.value === 'yes') {
+        retirementSection.style.opacity = '1';
+        retirementSelect.disabled = false;
+    } else {
+        retirementSection.style.opacity = '0.5';
+        retirementSelect.disabled = true;
+    }
+});
+
