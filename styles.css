@@ -22,7 +22,7 @@ button {
     cursor: pointer;
 }
 
-retirementTypeSection {
+#retirementTypeSection {
     margin-top: 15px;
     border-top: 1px solid #ddd;
     padding-top: 15px;
