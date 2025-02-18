@@ -36,6 +36,8 @@ function displayResult(text, className) {
     resultDiv.className = className;
 }
 
+// ... rest of your functions ...
+
 function clearForm() {
     document.getElementById('retired').value = 'no';
     document.getElementById('rank').value = 'o3';
@@ -45,9 +47,11 @@ function clearForm() {
     document.getElementById('result').textContent = '';
     
     // Reset retirement type UI
-    document.getElementById('retirementTypeSection').style
+    document.getElementById('retirementTypeSection').style.opacity = '0.5';
+    document.getElementById('retirementType').disabled = true;
+}
 
-// Add this at the bottom of script.js
+// Retirement type visibility handler
 document.getElementById('retired').addEventListener('change', function() {
     const retirementSection = document.getElementById('retirementTypeSection');
     const retirementSelect = document.getElementById('retirementType');
@@ -60,4 +64,3 @@ document.getElementById('retired').addEventListener('change', function() {
         retirementSelect.disabled = true;
     }
 });
-
