@@ -12,49 +12,111 @@
         <p><a href="#privacy-statement" class="privacy-link">View Privacy Statement</a></p>
 
         <div class="form-section">
-            <!-- Derivative Preference Section -->
+            <!-- Veteran Information -->
             <div class="form-group">
-                <label for="derivativePreference">Derivative Preference Claim:</label>
-                <select id="derivativePreference">
-                    <option value="none">No Derivative Claim</option>
-                    <option value="widow">Unmarried Widow/Widower of Veteran</option>
-                    <option value="spouse-disabled">Spouse of Service-Connected Disabled Veteran</option>
-                    <option value="mother-deceased">Mother of Veteran Who Died in War</option>
-                    <option value="mother-disabled">Mother of Permanently Disabled Veteran</option>
+                <label for="serviceYears">Total Active Duty Years:</label>
+                <input type="number" id="serviceYears" min="0" max="50" step="0.1" value="0">
+                <span class="note">(e.g., 4.5 = 4 years 6 months)</span>
+            </div>
+
+            <div class="form-group">
+                <label for="campaignService">Campaign Participation:</label>
+                <select id="campaignService">
+                    <option value="none">None</option>
+                    <option value="gulf-war">Gulf War (1990-1992)</option>
+                    <option value="post-911">Post-9/11 Campaign (with Medal)</option>
+                    <option value="other">Other Campaign Badge</option>
                 </select>
-                <span class="note">For retention subgroup A (not AD)</span>
+                <span class="note">Reservists must have been called to active duty under Title 10</span>
             </div>
 
-            <!-- Derivative Conditional Fields -->
-            <div id="derivativeDetails" style="display: none;">
-                <div class="form-group">
-                    <label for="veteranServicePeriod">Veteran's Service Period:</label>
-                    <select id="veteranServicePeriod">
-                        <option value="none">N/A</option>
-                        <option value="gulf-war">Gulf War (1990-1992)</option>
-                        <option value="post-911">Post-9/11 Campaign</option>
-                        <option value="other">Other Campaign</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="veteranDischargeType">Veteran's Discharge Type:</label>
-                    <select id="veteranDischargeType">
-                        <option value="honorable">Honorable</option>
-                        <option value="other">Other Than Honorable</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="dischargeType">Discharge Type:</label>
+                <select id="dischargeType">
+                    <option value="none">Not Applicable</option>
+                    <option value="honorable">Honorable</option>
+                    <option value="other">Other Than Honorable</option>
+                </select>
             </div>
 
-            <!-- Existing Veteran Fields (maintain previous structure) -->
-            <!-- [Include all previous form groups here] -->
+            <div class="form-group">
+                <label for="retirementStatus">Retirement Status:</label>
+                <select id="retirementStatus">
+                    <option value="none">Not Retired</option>
+                    <option value="medical">Medical Retirement</option>
+                    <option value="regular">Regular Retirement</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="retirementRankGroup" style="display: none;">
+                <label for="retirementRank">Highest Retirement Rank:</label>
+                <select id="retirementRank">
+                    <option value="none">N/A</option>
+                    <option value="e1-e9">E-1 to E-9</option>
+                    <option value="o1-o3">O-1 to O-3</option>
+                    <option value="o4-plus">O-4 or Higher</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="retirementPayGroup" style="display: none;">
+                <label for="militaryRetirementPay">Receiving Military Retirement Pay?</label>
+                <select id="militaryRetirementPay">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="disabilityRating">VA Disability Rating:</label>
+                <select id="disabilityRating">
+                    <option value="0">0%</option>
+                    <option value="10">10-20%</option>
+                    <option value="30">30% or Higher</option>
+                </select>
+            </div>
+
+            <!-- Derivative Section at Bottom -->
+            <div class="derivative-section">
+                <h3>Derivative Preference (Optional)</h3>
+                
+                <div class="form-group">
+                    <label for="derivativePreference">Derivative Claim Type:</label>
+                    <select id="derivativePreference">
+                        <option value="none">No Derivative Claim</option>
+                        <option value="widow">Unmarried Widow/Widower of Veteran</option>
+                        <option value="spouse-disabled">Spouse of Service-Connected Disabled Veteran</option>
+                        <option value="mother-deceased">Mother of Veteran Who Died in War</option>
+                        <option value="mother-disabled">Mother of Permanently Disabled Veteran</option>
+                    </select>
+                    <span class="note">For retention subgroup A (not AD)</span>
+                </div>
+
+                <div id="derivativeDetails" style="display: none;">
+                    <div class="form-group">
+                        <label for="veteranServicePeriod">Veteran's Service Period:</label>
+                        <select id="veteranServicePeriod">
+                            <option value="none">N/A</option>
+                            <option value="gulf-war">Gulf War (1990-1992)</option>
+                            <option value="post-911">Post-9/11 Campaign</option>
+                            <option value="other">Other Campaign</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="veteranDischargeType">Veteran's Discharge Type:</label>
+                        <select id="veteranDischargeType">
+                            <option value="honorable">Honorable</option>
+                            <option value="other">Other Than Honorable</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
             <button onclick="checkEligibility()">Verify Block 26</button>
         </div>
 
         <div id="result" class="result-hidden"></div>
 
-        <!-- Legal References -->
         <div class="legal-reference">
             <h2>Official References</h2>
             <ul>
@@ -63,9 +125,12 @@
             </ul>
         </div>
 
-        <!-- Privacy Statement -->
         <footer id="privacy-statement" class="privacy-statement">
-            <!-- Maintain previous privacy statement content -->
+            <h3>Privacy Statement</h3>
+            <p>This application was created and is hosted by <strong>Ryan Erickson</strong> at <a href="https://ryn.pm" target="_blank">https://ryn.pm</a>. The tool is designed as a client-side application, meaning <strong>none of the data you input is stored on any servers</strong>. All calculations and logic are processed directly within your browser for your privacy and security.</p>
+            <p>No personally identifiable information (PII) or input data is collected, transmitted, or saved by this application. Your use of this tool is entirely private.</p>
+            <p>If you have any questions, concerns, or feedback, please feel free to contact me at <a href="https://ryn.pm" target="_blank">https://ryn.pm</a>.</p>
+            <p><strong>Disclaimer:</strong> This tool is provided as-is for informational purposes only. It does not constitute legal advice or guarantee eligibility for veterans' preference or related benefits. For official determinations, please consult the appropriate government agency or legal counsel.</p>
         </footer>
     </div>
     <script src="script.js"></script>
