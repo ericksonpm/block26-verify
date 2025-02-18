@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +11,14 @@
         <h1>SF-50 Block 26 Verification Tool</h1>
         
         <div class="form-section">
+            <!-- Service Information -->
             <div class="form-group">
                 <label for="serviceYears">Total Active Duty Years:</label>
                 <input type="number" id="serviceYears" min="0" max="50" step="0.1" value="0">
-                <span class="note">(e.g., 4.5 = 4 years 6 months)</span>
+                <span class="note">Example: 4.5 = 4 years 6 months</span>
             </div>
 
+            <!-- Campaign Service -->
             <div class="form-group">
                 <label for="campaignService">Campaign Participation:</label>
                 <select id="campaignService">
@@ -28,6 +29,7 @@
                 </select>
             </div>
 
+            <!-- Discharge Type -->
             <div class="form-group">
                 <label for="dischargeType">Discharge Type:</label>
                 <select id="dischargeType">
@@ -37,6 +39,7 @@
                 </select>
             </div>
 
+            <!-- Retirement Status -->
             <div class="form-group">
                 <label for="retirementStatus">Retirement Status:</label>
                 <select id="retirementStatus">
@@ -46,16 +49,28 @@
                 </select>
             </div>
 
-            <div class="form-group" id="retirementRankGroup" style="display: none;">
-                <label for="retirementRank">Highest Retirement Rank:</label>
-                <select id="retirementRank">
-                    <option value="none">N/A</option>
-                    <option value="e1-e9">E-1 to E-9</option>
-                    <option value="o1-o3">O-1 to O-3</option>
-                    <option value="o4-plus">O-4 or Higher</option>
-                </select>
+            <!-- Conditional Retirement Fields -->
+            <div class="retirement-conditional" style="display: none;">
+                <div class="form-group">
+                    <label for="retirementRank">Highest Retirement Rank:</label>
+                    <select id="retirementRank">
+                        <option value="none">N/A</option>
+                        <option value="e1-e9">E-1 to E-9</option>
+                        <option value="o1-o3">O-1 to O-3</option>
+                        <option value="o4-plus">O-4 or Higher</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="militaryRetirementPay">Receiving Military Retirement Pay?</label>
+                    <select id="militaryRetirementPay">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
             </div>
 
+            <!-- Disability Rating -->
             <div class="form-group">
                 <label for="disabilityRating">VA Disability Rating:</label>
                 <select id="disabilityRating">
@@ -68,14 +83,16 @@
             <button onclick="checkEligibility()">Verify Block 26</button>
         </div>
 
-        <div id="result"></div>
+        <!-- Results Section -->
+        <div id="result" class="result-hidden"></div>
 
+        <!-- Legal References -->
         <div class="legal-reference">
             <h2>Official References</h2>
             <ul>
                 <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a> - Veterans' Preference</li>
+                <li><a href="https://www.ecfr.gov/current/title-5/chapter-I/subchapter-B/part-752" target="_blank">5 CFR Part 752</a> - Adverse Actions</li>
                 <li><a href="https://www.opm.gov/policy-data-oversight/veterans-services/vet-guide/" target="_blank">OPM Vet Guide</a></li>
-                <li><a href="https://www.ecfr.gov/current/title-5/chapter-I/subchapter-B/part-752/subpart-C/section-752.402" target="_blank">5 CFR 752.402</a></li>
             </ul>
         </div>
     </div>
