@@ -77,3 +77,32 @@ button {
 .close-alert:hover {
     color: #000;
 }
+
+/* Add to your existing styles */
+#result {
+    position: relative;
+    padding-right: 35px; /* Space for close button */
+}
+
+.message-content {
+    display: block;
+    margin-right: 20px;
+}
+
+.close-alert {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+.close-alert:hover {
+    color: #000;
+    background: none;
+}
