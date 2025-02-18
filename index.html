@@ -82,6 +82,30 @@
                     <option value="30">30% or Higher</option>
                 </select>
             </div>
+            <div class="form-group">
+    <label>Derivative Preference Claim:</label>
+    <select id="derivativePreference">
+        <option value="none">No Derivative Claim</option>
+        <option value="widow">Unmarried Widow/Widower of Veteran</option>
+        <option value="spouse-disabled">Spouse of Service-Connected Disabled Veteran</option>
+        <option value="mother-deceased">Mother of Veteran Who Died in War</option>
+        <option value="mother-disabled">Mother of Permanently Disabled Veteran</option>
+    </select>
+    <span class="note">For retention subgroup A (not AD)</span>
+</div>
+
+<!-- Conditional Fields for Derivative Claims -->
+<div id="derivativeDetails" style="display: none;">
+    <div class="form-group">
+        <label>Veteran's Service Period:</label>
+        <select id="veteranServicePeriod">
+            <option value="none">N/A</option>
+            <option value="gulf-war">Gulf War (1990-1992)</option>
+            <option value="post-911">Post-9/11 Campaign</option>
+            <option value="other">Other Campaign</option>
+        </select>
+    </div>
+</div>
 
             <button onclick="checkEligibility()">Verify Block 26</button>
         </div>
