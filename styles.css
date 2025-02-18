@@ -131,3 +131,14 @@ button:hover {
     margin-top: 0.4rem;
     display: block;
 }
+
+/* Add this to your styles.css */
+input, select {
+    width: 100%; /* Ensure all inputs and selects take up the same width */
+    padding: 0.8rem;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    transition: border-color 0.3s ease;
+}
