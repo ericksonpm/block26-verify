@@ -1,14 +1,13 @@
 function checkEligibility() {
     const isRetired = document.getElementById('retired').value === 'yes';
     const rank = document.getElementById('rank').value;
-    const serviceYears = parseInt(document.getElementById('serviceYears').value);
+    const serviceYears = parseInt(document.getElementById('serviceYears').value) || 0; // Handle NaN
     const disability = parseInt(document.getElementById('disability').value);
-    const retirementType = document.getElementById('retirementType').value; // NEW LINE
+    const retirementType = document.getElementById('retirementType').value;
 
     let resultText = '';
     let resultClass = '';
 
-    // Core logic from OPM guidelines
     if (!isRetired) {
         resultText = "Block 26: NO (Non-retired personnel)";
         resultClass = "alert";
@@ -16,11 +15,14 @@ function checkEligibility() {
         resultText = disability >= 30 ? "Block 26: YES (Disabled below O-4)" : "Block 26: NO";
         resultClass = disability >= 30 ? "success" : "alert";
     } else if (rank === 'o4') {
-        if (serviceYears < 20 || disability >= 30) {
-            resultText = "Block 26: YES (O-4+ with qualifying criteria)";
+        // Corrected logic per OPM guidelines
+        if ((retirementType === 'medical' || serviceYears < 20) && disability >= 30) {
+            resultText = "Block 26: YES (Qualifying exception)";
             resultClass = "success";
         } else {
-            resultText = "Block 26: NO (O-4+ without qualifying criteria)";
+            resultText = serviceYears >= 20 ? 
+                "Block 26: NO (20+ year non-medical retirement)" : 
+                "Block 26: NO";
             resultClass = "alert";
         }
     }
