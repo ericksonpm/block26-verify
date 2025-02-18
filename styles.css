@@ -1,108 +1,67 @@
-/* Existing styles */
+/* styles.css */
 body {
     font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
+    line-height: 1.6;
+    margin: 0;
     padding: 20px;
+    background-color: #f0f0f0;
 }
 
-.form-step {
-    margin: 15px 0;
-    padding: 10px;
-    background: #f5f5f5;
-    border-radius: 5px;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 button {
-    margin: 10px 5px;
-    padding: 10px 20px;
-    background: #007bff;
+    background: #3498db;
     color: white;
     border: none;
+    padding: 12px 24px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-#retirementTypeSection {
-    margin-top: 15px;
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
+button:hover {
+    background: #2980b9;
 }
 
 #result {
     margin-top: 20px;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
-/* New alert classes */
-.success {
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    color: #155724;
-}
-
-.alert {
-    background-color: #fff3cd;
-    border: 1px solid #ffeeba;
-    color: #856404;
-}
-
-.error {
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    color: #721c24;
-    display: none; /* Hidden by default */
-}
-
-/* Animation for alerts */
-#result {
-    opacity: 1;
-    transition: opacity 0.4s ease;
-}
-
-#result.hidden {
-    opacity: 0;
-}
-
-/* Close button styling */
-.close-alert {
-    float: right;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-left: 15px;
-}
-
-.close-alert:hover {
-    color: #000;
-}
-
-/* Add to your existing styles */
-#result {
-    position: relative;
-    padding-right: 35px; /* Space for close button */
-}
-
-.message-content {
-    display: block;
-    margin-right: 20px;
-}
-
-.close-alert {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: inherit;
-    padding: 0;
-    font-size: 1.5em;
-    line-height: 1;
-}
-
-.close-alert:hover {
-    color: #000;
-    background: none;
+.guidance {
+    margin-top: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 4px;
 }
