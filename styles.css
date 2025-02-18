@@ -142,3 +142,26 @@ input, select {
     box-sizing: border-box; /* Include padding and border in width calculation */
     transition: border-color 0.3s ease;
 }
+
+footer.privacy-statement {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-top: 2px solid #dee2e6;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+footer.privacy-statement h3 {
+    font-size: 1.2rem;
+    color: #343a40;
+}
+
+footer.privacy-statement a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer.privacy-statement a:hover {
+    text-decoration: underline;
+}
