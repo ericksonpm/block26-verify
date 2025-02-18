@@ -10,8 +10,8 @@ jobs:
       - name: Cloudflare Pages
         uses: cloudflare/pages-action@1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: 65YgjaxEjE8-r4HffhimaxuC7cEBQtEEssdY1dvO
+          accountId: db540b0036310230657120113edf2b93
           projectName: block26-verify
           directory: .
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
