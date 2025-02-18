@@ -27,16 +27,18 @@ function checkEligibility() {
     if (formValues.dischargeType !== 'honorable') {
         disqualifiers.push("Non-honorable discharge type");
     } else {
+
         // Service Duration Requirements
-        if (formValues.campaignService === 'none') {
-            if (totalMonths < 24) { // 24 months = 2 years
-                disqualifiers.push("24+ months active duty required (without campaign participation)");
-            } else {
-                reasons.push(`${formValues.serviceYears} years (${totalMonths} months) qualifying service`);
-            }
-        } else {
-            reasons.push(`Campaign participation: ${formValues.campaignService.replace(/-/g, ' ').toUpperCase()}`);
-        }
+if (formValues.campaignService === 'none') {
+    if (totalMonths < 24) { // 24 months = 2 years
+        disqualifiers.push("24+ months active duty required (without campaign participation)");
+    } else {
+        reasons.push(`${formValues.serviceYears} years (${totalMonths} months) qualifying service`);
+    }
+} else {
+    reasons.push(`Campaign participation: ${formValues.campaignService.replace(/-/g, ' ').toUpperCase()}`);
+}
+
 
         // Retirement Status Analysis
         if (formValues.retirementStatus === 'regular') {
