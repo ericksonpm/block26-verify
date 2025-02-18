@@ -1,5 +1,5 @@
 // Form Visibility Control
-document.getElementById('retirementStatus').addEventListener('change', function() {
+document.getElementById('retirementStatus').addEventListener('change', function () {
     const conditionalSection = document.querySelector('.retirement-conditional');
     conditionalSection.style.display = this.value !== 'none' ? 'block' : 'none';
 });
@@ -14,7 +14,7 @@ function checkEligibility() {
         retirementStatus: document.getElementById('retirementStatus').value,
         retirementRank: document.getElementById('retirementRank').value,
         disabilityRating: parseInt(document.getElementById('disabilityRating').value),
-        militaryRetirementPay: document.getElementById('militaryRetirementPay')?.value || 'no'
+        militaryRetirementPay: document.getElementById('militaryRetirementPay')?.value || 'no',
     };
 
     // Initialize Tracking Variables
@@ -39,20 +39,18 @@ function checkEligibility() {
         }
 
         // Retirement Status Analysis
-        if (formValues.retirementStatus !== 'none') {
-            // O-4+ Retirement Rules (5 U.S.C. 2108(3)(D))
+        if (formValues.retirementStatus === 'regular') {
             if (formValues.retirementRank === 'o4-plus') {
                 if (formValues.militaryRetirementPay === 'yes') {
                     disqualifiers.push("O-4+ retirees receiving military retirement pay are ineligible");
-                } else if (formValues.disabilityRating >= 30) {
-                    reasons.push("O-4+ retiree with 30%+ disability not drawing retirement pay");
+                } else {
+                    disqualifiers.push(
+                        "O-4+ retiree requires additional exceptions (e.g., continuous federal employment since 1964)"
+                    );
                 }
             }
-
-            // Medical Retirement Exception (5 CFR 752.402(c)(3))
-            if (formValues.retirementStatus === 'medical' && formValues.disabilityRating >= 30) {
-                reasons.push("Medical retiree with 30%+ disability rating");
-            }
+        } else if (formValues.retirementStatus === 'medical' && formValues.disabilityRating >= 30) {
+            reasons.push("Medical retiree with 30%+ disability rating");
         }
 
         // Disability Considerations
@@ -90,9 +88,4 @@ function checkEligibility() {
                 <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a></li>
                 ${formValues.retirementRank === 'o4-plus' ? 
                 '<li><a href="https://www.law.cornell.edu/uscode/text/5/2108#a_3_D" target="_blank">5 U.S.C. 2108(3)(D)</a></li>' : ''}
-                <li><a href="https://www.ecfr.gov/current/title-5/chapter-I/subchapter-B/part-752/subpart-C/section-752.402#p-752.402(c)(3)" target="_blank">5 CFR 752.402(c)(3)</a></li>
-            </ul>
-        </div>
-    `;
-    resultDiv.style.display = 'block';
-}
+                <li><a href
