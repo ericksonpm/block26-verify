@@ -208,3 +208,29 @@ html {
     scroll-behavior: smooth;
 }
 
+.subgroup-explanation {
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.subgroup-AD {
+    background: #e3f2fd;
+    border: 2px solid #2196f3;
+}
+
+.subgroup-A {
+    background: #f0f4c3;
+    border: 2px solid #cddc39;
+}
+
+.subgroup-B {
+    background: #ffebee;
+    border: 2px solid #ff5252;
+}
+
+.subgroup-factors {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
