@@ -112,4 +112,41 @@ function checkEligibility() {
     `;
     resultDiv.className = finalEligible ? 'result-eligible' : 'result-ineligible';
     resultDiv.style.display = 'block';
+// Determine Subgroup
+    let subgroup = 'B';
+    const subgroupDetails = [];
+
+    if (finalEligible) {
+        if (formValues.disabilityRating >= 30) {
+            subgroup = 'AD';
+            subgroupDetails.push("30%+ Service-Connected Disability (5 U.S.C. 2108(3))");
+        } else if (derivativeResult.isEligible || formValues.campaignService !== 'none' || totalMonths >= 24) {
+            subgroup = 'A';
+            subgroupDetails.push(derivativeResult.isEligible ? 
+                "Derivative Preference (OPM RIF Guidance)" : 
+                "Campaign Service or Non-Disabled Veteran");
+        }
+    }
+
+    // Build Results with Subgroup
+    resultDiv.innerHTML = `
+        <h3 class="${finalEligible ? 'eligible' : 'ineligible'}">
+            ${finalEligible ? '✅ Eligible' : '❌ Not Eligible'} - Retention Subgroup ${subgroup}
+        </h3>
+        <div class="subgroup-explanation subgroup-${subgroup}">
+            <strong>Subgroup ${subgroup} Definition:</strong>
+            ${subgroup === 'AD' ? 
+                'Veterans with 30%+ compensable disability (Highest Retention Priority)' :
+            subgroup === 'A' ? 
+                'Other preference eligibles (Including campaign veterans and derivative claims)' : 
+                'Non-preference eligibles'}
+        </div>
+        ${allReasons.length ? `<div class="result-section">...` : ''}
+        ${subgroupDetails.length ? `
+        <div class="subgroup-factors">
+            <strong>Subgroup Determination Factors:</strong>
+            <ul>${subgroupDetails.map(d => `<li>${d}</li>`).join('')}</ul>
+        </div>` : ''}
+        <!-- Rest of result display -->
+    `;
 }
