@@ -97,38 +97,23 @@ function checkEligibility() {
     const allReasons = [...veteranReasons, ...derivativeResult.derivativeReasons];
     const allDisqualifiers = [...veteranDisqualifiers, ...derivativeResult.derivativeDisqualifiers];
 
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `
-        <h3 class="${finalEligible ? 'eligible' : 'ineligible'}">${finalEligible ? '✅ Eligible' : '❌ Not Eligible'}</h3>
-        ${allReasons.length ? `<div class="result-section"><h4>Qualifying Factors:</h4><ul>${allReasons.map(r => `<li>${r}</li>`).join('')}</ul></div>` : ''}
-        ${allDisqualifiers.length ? `<div class="result-section"><h4>Disqualifying Factors:</h4><ul>${allDisqualifiers.map(d => `<li>${d}</li>`).join('')}</ul></div>` : ''}
-        <div class="legal-refs">
-            <h4>Legal References:</h4>
-            <ul>
-                <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a></li>
-                ${formValues.derivativePreference !== 'none' ? '<li><a href="https://www.opm.gov/policy-data-oversight/workforce-restructuring/reductions-in-force/workforce_reshaping.pdf#page=23" target="_blank">OPM RIF Derivative Preference</a></li>' : ''}
-            </ul>
-        </div>
-    `;
-    resultDiv.className = finalEligible ? 'result-eligible' : 'result-ineligible';
-    resultDiv.style.display = 'block';
-// Determine Subgroup
+    // Determine Subgroup
     let subgroup = 'B';
     const subgroupDetails = [];
-
+    
     if (finalEligible) {
         if (formValues.disabilityRating >= 30) {
             subgroup = 'AD';
             subgroupDetails.push("30%+ Service-Connected Disability (5 U.S.C. 2108(3))");
-        } else if (derivativeResult.isEligible || formValues.campaignService !== 'none' || totalMonths >= 24) {
+        } else if (derivativeResult.isDerivativeEligible || formValues.campaignService !== 'none' || totalMonths >= 24) {
             subgroup = 'A';
-            subgroupDetails.push(derivativeResult.isEligible ? 
+            subgroupDetails.push(derivativeResult.isDerivativeEligible ? 
                 "Derivative Preference (OPM RIF Guidance)" : 
                 "Campaign Service or Non-Disabled Veteran");
         }
     }
 
-    // Build Results with Subgroup
+    const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = `
         <h3 class="${finalEligible ? 'eligible' : 'ineligible'}">
             ${finalEligible ? '✅ Eligible' : '❌ Not Eligible'} - Retention Subgroup ${subgroup}
@@ -141,12 +126,29 @@ function checkEligibility() {
                 'Other preference eligibles (Including campaign veterans and derivative claims)' : 
                 'Non-preference eligibles'}
         </div>
-        ${allReasons.length ? `<div class="result-section">...` : ''}
+        ${allReasons.length ? `
+        <div class="result-section">
+            <h4>Qualifying Factors:</h4>
+            <ul>${allReasons.map(r => `<li>${r}</li>`).join('')}</ul>
+        </div>` : ''}
+        ${allDisqualifiers.length ? `
+        <div class="result-section">
+            <h4>Disqualifying Factors:</h4>
+            <ul>${allDisqualifiers.map(d => `<li>${d}</li>`).join('')}</ul>
+        </div>` : ''}
         ${subgroupDetails.length ? `
         <div class="subgroup-factors">
             <strong>Subgroup Determination Factors:</strong>
             <ul>${subgroupDetails.map(d => `<li>${d}</li>`).join('')}</ul>
         </div>` : ''}
-        <!-- Rest of result display -->
+        <div class="legal-refs">
+            <h4>Legal References:</h4>
+            <ul>
+                <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a></li>
+                ${formValues.derivativePreference !== 'none' ? '<li><a href="https://www.opm.gov/policy-data-oversight/workforce-restructuring/reductions-in-force/workforce_reshaping.pdf#page=23" target="_blank">OPM RIF Derivative Preference</a></li>' : ''}
+            </ul>
+        </div>
     `;
+    resultDiv.className = finalEligible ? 'result-eligible' : 'result-ineligible';
+    resultDiv.style.display = 'block';
 }
