@@ -234,3 +234,35 @@ html {
     padding-left: 20px;
 }
 
+/* Warning Banner */
+.official-notice {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.warning-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+}
+
+/* Version History */
+.version-history ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.version-history li::before {
+    content: "▹";
+    color: #3498db;
+    margin-right: 0.5rem;
+}
+
+.regulatory ul {
+    columns: 2;
+}
+
