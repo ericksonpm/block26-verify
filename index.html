@@ -10,6 +10,7 @@
     <div class="container">
         <!-- Warning Header -->
         <div class="official-notice">
+            <div class="warning-emoji">⚠️</div>
             <div class="warning-text">
                 <h2>UNOFFICIAL TOOL</h2>
                 <p>Not affiliated with or endorsed by any government agency</p>
@@ -20,8 +21,12 @@
         
         <!-- Main Form -->
         <div class="form-section">
-            <!-- [Keep all form elements from previous version] -->
-            <!-- Retirement Status -->
+            <div class="form-group">
+                <label for="serviceYears">Total Active Duty Years:</label>
+                <input type="number" id="serviceYears" min="0" max="40" step="0.1" required>
+                <span class="note">Include all active duty time</span>
+            </div>
+
             <div class="form-group">
                 <label for="retirementType">Retirement Category:</label>
                 <select id="retirementType">
@@ -32,7 +37,6 @@
                 </select>
             </div>
 
-            <!-- Medical Details -->
             <div class="form-group" id="medicalDetails" style="display:none;">
                 <label for="combatRelated">Combat-Related Injury:</label>
                 <select id="combatRelated">
@@ -42,7 +46,6 @@
                 <span class="note">As defined by 10 U.S.C. 1201</span>
             </div>
 
-            <!-- Disability Rating -->
             <div class="form-group">
                 <label for="disabilityRating">VA Disability Rating:</label>
                 <select id="disabilityRating">
@@ -53,7 +56,6 @@
                 </select>
             </div>
 
-            <!-- RIF Parameters -->
             <div class="rif-section">
                 <h3>Reduction-in-Force Parameters</h3>
                 <div class="form-group">
@@ -78,7 +80,7 @@
                 </div>
             </div>
 
-            <button onclick="calculateRifStatus()">Generate SF-50 Codes</button>
+            <button type="button" id="calculateButton">Generate SF-50 Codes</button>
         </div>
 
         <!-- Results Display -->
@@ -117,24 +119,10 @@
             <div class="version-history">
                 <h4>Recent Updates:</h4>
                 <ul>
-                    <li>2025-02-25: Added Block 23/26 interaction logic</li>
+                    <li>2025-02-26: Fixed button functionality</li>
                     <li>2025-02-25: Medical retirement validation</li>
-                    <li>2025-02-24: Subgroup AD exclusion for regular retirees</li>
-                    <li>2025-02-23: Initial RIF framework implementation</li>
+                    <li>2025-02-24: Subgroup AD exclusion</li>
                 </ul>
-            </div>
-
-            <div class="regulatory-info">
-                <h4>Reference Materials:</h4>
-                <ul>
-                    <li>5 CFR 211.102(c)(3)</li>
-                    <li>OPM Workforce Reshaping Handbook (2023)</li>
-                    <li>DFARS 252.211-7002</li>
-                </ul>
-            </div>
-
-            <div class="final-notice">
-                <p>⚠️ This tool is provided as-is without warranty. Always verify results with your HR specialist.</p>
             </div>
         </footer>
     </div>
