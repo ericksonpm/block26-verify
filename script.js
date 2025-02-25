@@ -1,88 +1,60 @@
-document.getElementById('retirementStatus').addEventListener('change', function() {
-    const rankGroup = document.getElementById('retirementRankGroup');
-    const payGroup = document.getElementById('retirementPayGroup');
-    const medicalGroup = document.getElementById('medicalRetirementGroup');
-    const isRetired = this.value !== 'none';
-    
-    rankGroup.style.display = isRetired ? 'block' : 'none';
-    payGroup.style.display = isRetired ? 'block' : 'none';
-    medicalGroup.style.display = this.value === 'medical' ? 'block' : 'none';
+document.getElementById('retirementType').addEventListener('change', function() {
+    document.getElementById('medicalDetails').style.display = 
+        this.value === 'medical' ? 'block' : 'none';
 });
 
-document.getElementById('derivativePreference').addEventListener('change', function() {
-    document.getElementById('derivativeDetails').style.display = this.value !== 'none' ? 'block' : 'none';
-});
-
-function checkDerivativeEligibility(formValues) {
-    // ... keep previous derivative eligibility logic unchanged ...
-}
-
-function checkEligibility() {
-    const formValues = {
-        // ... keep previous form value collection ...
+function calculateRifStatus() {
+    const inputs = {
+        serviceYears: parseFloat(document.getElementById('serviceYears').value) || 0,
+        retirementType: document.getElementById('retirementType').value,
+        combatRelated: document.getElementById('combatRelated').value,
+        disabilityRating: document.getElementById('disabilityRating').value,
+        currentTenure: document.getElementById('currentTenure').value,
+        veteranPreference: document.getElementById('veteranPreference').value
     };
 
-    let isVeteranEligible = false;
-    const veteranReasons = [];
-    const veteranDisqualifiers = [];
-    const totalMonths = formValues.serviceYears * 12;
-
-    // New RIF veteran eligibility check for retirees
-    let isRifVeteran = true;
-    if(formValues.retirementStatus === 'regular') {
-        isRifVeteran = formValues.serviceYears < 20 || 
-                      formValues.medicalRetirementType === 'combat'; // Combat exception
-    }
-
-    if (formValues.dischargeType === 'honorable' && isRifVeteran) {
-        // ... keep existing eligibility checks ...
-
-        // Updated medical retirement validation
-        if (formValues.retirementStatus === 'medical' && formValues.disabilityRating >= 30) {
-            if (formValues.medicalRetirementType === 'combat') {
-                veteranReasons.push("Combat-related medical retiree with 30%+ disability");
-                isVeteranEligible = true;
-            } else {
-                veteranDisqualifiers.push("Non-combat medical retirees ineligible for Subgroup AD");
-                isVeteranEligible = false;
-            }
-        }
-
-        // Updated regular retirement handling
-        if (formValues.retirementStatus === 'regular') {
-            if(formValues.serviceYears >= 20) {
-                veteranDisqualifiers.push("20+ year regular retirees ineligible for veteran preference");
-                isVeteranEligible = false;
-            }
-            // ... keep existing O-4+ check ...
-        }
-    }
-
-    // Updated subgroup determination
+    // Initialize results
+    let block23 = '';
+    let block26 = 'No';
     let subgroup = 'B';
-    const subgroupDetails = [];
-    
-    if (finalEligible) {
-        if (formValues.disabilityRating >= 30) {
-            const isCombatMedical = formValues.retirementStatus === 'medical' && 
-                                  formValues.medicalRetirementType === 'combat';
-            const isQualifiedRegular = formValues.retirementStatus === 'regular' && 
-                                     formValues.serviceYears < 20;
 
-            if(isCombatMedical || isQualifiedRegular || formValues.retirementStatus === 'none') {
-                subgroup = 'AD';
-                subgroupDetails.push(
-                    isCombatMedical ? "Combat-Related Medical Retiree (30%+ Disability)" :
-                    isQualifiedRegular ? "Regular Retiree <20 Years Service (30%+ Disability)" :
-                    "30%+ Service-Connected Disability"
-                );
-            }
-        }
-        else if (derivativeResult.isDerivativeEligible || formValues.campaignService !== 'none' || totalMonths >= 24) {
+    // Calculate Block 23 code
+    if(inputs.veteranPreference !== 'none') {
+        block23 = {
+            'TP': '2',
+            'XP': '3',
+            'CP': '4',
+            'CPS': '6',
+            'SSP': '7'
+        }[inputs.veteranPreference];
+    }
+
+    // Calculate Block 26 eligibility
+    if(inputs.retirementType === 'regular' && inputs.serviceYears >= 20) {
+        block26 = 'No';
+    } else {
+        const isCombatMedical = inputs.retirementType === 'medical' && 
+                               inputs.combatRelated === 'yes';
+        const hasCompensable = inputs.disabilityRating === '30c';
+        
+        if(isCombatMedical || hasCompensable) {
+            block26 = 'Yes';
+            subgroup = 'AD';
+        } else if(inputs.veteranPreference !== 'none') {
+            block26 = 'Yes';
             subgroup = 'A';
-            // ... keep existing A subgroup logic ...
         }
     }
 
-    // ... keep rest of result display logic ...
+    // Special case for Sole Survivor
+    if(inputs.veteranPreference === 'SSP') {
+        block26 = 'No';
+        subgroup = 'B';
+    }
+
+    // Update display
+    document.getElementById('block23').textContent = block23 || 'Not Applicable';
+    document.getElementById('block26').textContent = block26;
+    document.getElementById('subgroup').textContent = subgroup;
+    document.getElementById('sf50Results').style.display = 'block';
 }
