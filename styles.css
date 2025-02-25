@@ -266,3 +266,10 @@ html {
     columns: 2;
 }
 
+/* Add rank group styling */
+#rankGroup {
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #ddd;
+}
