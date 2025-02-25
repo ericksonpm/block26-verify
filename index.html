@@ -9,138 +9,108 @@
 <body>
     <div class="container">
         <h1>SF-50 Block 26 Verification Tool</h1>
-        <p><a href="#privacy-statement" class="privacy-link">View Privacy Statement</a></p>
+        <p class="disclaimer">Official use only - Verify RIF retention subgroup eligibility</p>
 
         <div class="form-section">
+            <!-- Service Information -->
             <div class="form-group">
-                <label for="serviceYears">Total Military Service Years:</label>
+                <label for="serviceYears">Total Active Duty Years:</label>
                 <input type="number" id="serviceYears" min="0" max="40" step="0.1" required>
                 <span class="note">Include all active duty time</span>
             </div>
 
+            <!-- Retirement Status -->
             <div class="form-group">
-                <label for="campaignService">Campaign Participation:</label>
-                <select id="campaignService">
-                    <option value="none">None</option>
-                    <option value="gulf-war">Gulf War (1990-1992)</option>
-                    <option value="post-911">Post-9/11 Campaign (with Medal)</option>
-                    <option value="other">Other Campaign Badge</option>
-                </select>
-                <span class="note">Reservists must have been called to active duty under Title 10</span>
-            </div>
-
-            <div class="form-group">
-                <label for="dischargeType">Discharge Type:</label>
-                <select id="dischargeType">
-                    <option value="none">Not Applicable</option>
-                    <option value="honorable">Honorable</option>
-                    <option value="other">Other Than Honorable</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="retirementStatus">Retirement Status:</label>
-                <select id="retirementStatus">
+                <label for="retirementType">Retirement Category:</label>
+                <select id="retirementType">
                     <option value="none">Not Retired</option>
+                    <option value="regular">Regular Retirement (20+ yrs)</option>
                     <option value="medical">Medical Retirement</option>
-                    <option value="regular">Regular Retirement</option>
+                    <option value="disability">Disability Retirement</option>
                 </select>
             </div>
 
-            <div class="form-group" id="retirementRankGroup" style="display: none;">
-                <label for="retirementRank">Highest Retirement Rank:</label>
-                <select id="retirementRank">
-                    <option value="none">N/A</option>
-                    <option value="e1-e9">E-1 to E-9</option>
-                    <option value="o1-o3">O-1 to O-3</option>
-                    <option value="o4-plus">O-4 or Higher</option>
-                </select>
-            </div>
-
-            <div class="form-group" id="retirementPayGroup" style="display: none;">
-                <label for="militaryRetirementPay">Receiving Military Retirement Pay?</label>
-                <select id="militaryRetirementPay">
-                    <option value="yes">Yes</option>
+            <!-- Updated Medical Retirement Details -->
+            <div class="form-group" id="medicalDetails" style="display:none;">
+                <label for="combatRelated">Combat-Related Injury:</label>
+                <select id="combatRelated">
                     <option value="no">No</option>
+                    <option value="yes">Yes</option>
                 </select>
+                <span class="note">As defined by 10 U.S.C. 1201</span>
             </div>
 
-            <div class="form-group" id="medicalRetirementGroup" style="display: none;">
-                <label for="medicalRetirementType">Medical Retirement Basis:</label>
-                <select id="medicalRetirementType">
-                    <option value="combat">Combat-Related</option>
-                    <option value="non-combat">Non-Combat Related</option>
-                </select>
-                <span class="note">Required for Subgroup AD eligibility</span>
-            </div>
-
+            <!-- Disability Rating -->
             <div class="form-group">
                 <label for="disabilityRating">VA Disability Rating:</label>
                 <select id="disabilityRating">
                     <option value="0">0%</option>
                     <option value="10">10-20%</option>
-                    <option value="30">30% or Higher</option>
+                    <option value="30">30%+ (Non-compensable)</option>
+                    <option value="30c">30%+ (Compensable)</option>
                 </select>
             </div>
 
-            <div class="derivative-section">
-                <h3>Derivative Preference (Optional)</h3>
+            <!-- RIF Specific Fields -->
+            <div class="rif-section">
+                <h3>Reduction-in-Force Parameters</h3>
                 <div class="form-group">
-                    <label for="derivativePreference">Derivative Claim Type:</label>
-                    <select id="derivativePreference">
-                        <option value="none">No Derivative Claim</option>
-                        <option value="widow">Unmarried Widow/Widower of Veteran</option>
-                        <option value="spouse-disabled">Spouse of Service-Connected Disabled Veteran</option>
-                        <option value="mother-deceased">Mother of Veteran Who Died in War</option>
-                        <option value="mother-disabled">Mother of Permanently Disabled Veteran</option>
+                    <label for="currentTenure">Current Tenure Group:</label>
+                    <select id="currentTenure">
+                        <option value="1">Group 1 - Career</option>
+                        <option value="2">Group 2 - Conditional</option>
+                        <option value="3">Group 3 - Excepted</option>
                     </select>
-                    <span class="note">For retention subgroup A (not AD)</span>
                 </div>
 
-                <div id="derivativeDetails" style="display: none;">
-                    <div class="form-group">
-                        <label for="veteranServicePeriod">Veteran's Service Period:</label>
-                        <select id="veteranServicePeriod">
-                            <option value="none">N/A</option>
-                            <option value="gulf-war">Gulf War (1990-1992)</option>
-                            <option value="post-911">Post-9/11 Campaign</option>
-                            <option value="other">Other Campaign</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="veteranDischargeType">Veteran's Discharge Type:</label>
-                        <select id="veteranDischargeType">
-                            <option value="honorable">Honorable</option>
-                            <option value="other">Other Than Honorable</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="veteranPreference">Veteran Preference Category:</label>
+                    <select id="veteranPreference">
+                        <option value="none">No Preference</option>
+                        <option value="TP">5-point (TP)</option>
+                        <option value="XP">10-point (XP)</option>
+                        <option value="CP">10-point Compensable (CP)</option>
+                        <option value="CPS">10-point 30%+ (CPS)</option>
+                        <option value="SSP">Sole Survivor (SSP)</option>
+                    </select>
                 </div>
             </div>
 
-            <button onclick="checkEligibility()">Verify Block 26</button>
+            <button onclick="calculateRifStatus()">Generate SF-50 Codes</button>
         </div>
 
-        <div id="result" class="result-hidden"></div>
-
-        <div class="legal-reference">
-            <h2>Official References</h2>
-            <ul>
-                <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a></li>
-                <li><a href="https://www.ecfr.gov/current/title-5/chapter-I/subchapter-B/part-211" target="_blank">5 CFR 211.102</a></li>
-                <li><a href="https://www.opm.gov/policy-data-oversight/workforce-restructuring/reductions-in-force/" target="_blank">OPM RIF Guidance</a></li>
-            </ul>
+        <!-- Results Display -->
+        <div id="sf50Results" class="result-hidden">
+            <div class="result-block">
+                <h3>SF-50 Coding Results</h3>
+                <table>
+                    <tr>
+                        <th>Block 23</th>
+                        <td id="block23">-</td>
+                    </tr>
+                    <tr>
+                        <th>Block 26</th>
+                        <td id="block26">-</td>
+                    </tr>
+                    <tr>
+                        <th>Retention Subgroup</th>
+                        <td id="subgroup">-</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="legal-refs">
+                <h4>Reference Authorities:</h4>
+                <ul>
+                    <li>5 CFR 211.102</li>
+                    <li>OPM Workforce Reshaping Handbook</li>
+                    <li>38 U.S.C. 4214</li>
+                </ul>
+            </div>
         </div>
 
-        <footer id="privacy-statement" class="privacy-statement">
-            <h3>Privacy Statement</h3>
-            <p>The tool is designed as a client-side application, meaning <strong>none of the data you input is stored on any servers</strong>. All calculations and logic are processed directly within your browser for your privacy and security.</p>
-            <p>No personally identifiable information (PII) or input data is collected, transmitted, or saved by this application.</p>
-            <p><strong>Disclaimer:</strong> This tool is provided as-is for informational purposes only. It does not constitute legal advice or guarantee eligibility for veterans' preference or related benefits. For official determinations, please consult the appropriate government agency or legal counsel.</p>
-            <p>Updates: Feb 25, 2025: Added medical retirement pay exception handling</p>
-            <p>Updates: Feb 21, 2025: Added combat-related retirement validation</p>
-            <p>Updates: Feb 20, 2025: Re-validated logic per OPM Handbook</p>
-            <p>Updates: Feb 19, 2025: Initial subgroup implementation</p>
+        <footer class="privacy-statement">
+            <p>Last updated: 25 Feb 2025 | System conforms to DFARS 252.211-7002 validation requirements</p>
         </footer>
     </div>
     <script src="script.js"></script>
