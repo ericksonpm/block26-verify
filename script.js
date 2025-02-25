@@ -1,9 +1,16 @@
-document.getElementById('retirementType').addEventListener('change', function() {
-    document.getElementById('medicalDetails').style.display = 
-        this.value === 'medical' ? 'block' : 'none';
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listeners
+    document.getElementById('retirementType').addEventListener('change', function() {
+        document.getElementById('medicalDetails').style.display = 
+            this.value === 'medical' ? 'block' : 'none';
+    });
+
+    document.getElementById('calculateButton').addEventListener('click', calculateRifStatus);
 });
 
-function calculateRifStatus() {
+function calculateRifStatus(e) {
+    if(e) e.preventDefault();
+    
     const inputs = {
         serviceYears: parseFloat(document.getElementById('serviceYears').value) || 0,
         retirementType: document.getElementById('retirementType').value,
@@ -13,12 +20,11 @@ function calculateRifStatus() {
         veteranPreference: document.getElementById('veteranPreference').value
     };
 
-    // Initialize results
+    // Calculate results
     let block23 = '';
     let block26 = 'No';
     let subgroup = 'B';
 
-    // Calculate Block 23 code
     if(inputs.veteranPreference !== 'none') {
         block23 = {
             'TP': '2',
@@ -29,31 +35,25 @@ function calculateRifStatus() {
         }[inputs.veteranPreference];
     }
 
-    // Calculate Block 26 eligibility
-    if(inputs.retirementType === 'regular' && inputs.serviceYears >= 20) {
-        block26 = 'No';
-    } else {
-        const isCombatMedical = inputs.retirementType === 'medical' && 
-                               inputs.combatRelated === 'yes';
-        const hasCompensable = inputs.disabilityRating === '30c';
-        
-        if(isCombatMedical || hasCompensable) {
-            block26 = 'Yes';
-            subgroup = 'AD';
-        } else if(inputs.veteranPreference !== 'none') {
-            block26 = 'Yes';
-            subgroup = 'A';
-        }
+    const isCombatMedical = inputs.retirementType === 'medical' && 
+                          inputs.combatRelated === 'yes';
+    const hasCompensable = inputs.disabilityRating === '30c';
+
+    if(isCombatMedical || hasCompensable) {
+        block26 = 'Yes';
+        subgroup = 'AD';
+    } else if(inputs.veteranPreference !== 'none' && inputs.veteranPreference !== 'SSP') {
+        block26 = 'Yes';
+        subgroup = 'A';
     }
 
-    // Special case for Sole Survivor
-    if(inputs.veteranPreference === 'SSP') {
+    if(inputs.retirementType === 'regular' && inputs.serviceYears >= 20) {
         block26 = 'No';
         subgroup = 'B';
     }
 
     // Update display
-    document.getElementById('block23').textContent = block23 || 'Not Applicable';
+    document.getElementById('block23').textContent = block23 || 'N/A';
     document.getElementById('block26').textContent = block26;
     document.getElementById('subgroup').textContent = subgroup;
     document.getElementById('sf50Results').style.display = 'block';
