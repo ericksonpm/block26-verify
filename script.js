@@ -1,9 +1,12 @@
 document.getElementById('retirementStatus').addEventListener('change', function() {
     const rankGroup = document.getElementById('retirementRankGroup');
     const payGroup = document.getElementById('retirementPayGroup');
-    const showGroups = this.value !== 'none';
-    rankGroup.style.display = showGroups ? 'block' : 'none';
-    payGroup.style.display = showGroups ? 'block' : 'none';
+    const medicalGroup = document.getElementById('medicalRetirementGroup');
+    const isRetired = this.value !== 'none';
+    
+    rankGroup.style.display = isRetired ? 'block' : 'none';
+    payGroup.style.display = isRetired ? 'block' : 'none';
+    medicalGroup.style.display = this.value === 'medical' ? 'block' : 'none';
 });
 
 document.getElementById('derivativePreference').addEventListener('change', function() {
@@ -60,7 +63,8 @@ function checkEligibility() {
         militaryRetirementPay: document.getElementById('militaryRetirementPay')?.value || 'no',
         derivativePreference: document.getElementById('derivativePreference').value,
         veteranServicePeriod: document.getElementById('veteranServicePeriod').value,
-        veteranDischargeType: document.getElementById('veteranDischargeType').value
+        veteranDischargeType: document.getElementById('veteranDischargeType').value,
+        medicalRetirementType: document.getElementById('medicalRetirementType')?.value || 'non-combat'
     };
 
     let isVeteranEligible = false;
@@ -77,12 +81,23 @@ function checkEligibility() {
             isVeteranEligible = true;
         }
 
-        if (formValues.retirementStatus === 'medical' && formValues.disabilityRating >= 30) {
-            veteranReasons.push("Medical retiree with 30%+ disability rating");
-            isVeteranEligible = true;
+        // Medical retirement validation
+        if (formValues.retirementStatus === 'medical') {
+            if (formValues.disabilityRating >= 30) {
+                if (formValues.medicalRetirementType === 'combat') {
+                    veteranReasons.push("Combat-related medical retiree with 30%+ disability");
+                    isVeteranEligible = true;
+                } else {
+                    veteranDisqualifiers.push("Medical retirement not combat-related");
+                    isVeteranEligible = false;
+                }
+            } else {
+                veteranDisqualifiers.push("Medical retirees require 30%+ disability rating");
+                isVeteranEligible = false;
+            }
         }
 
-        // Updated O-4+ check with medical retirement exception
+        // Regular retirement pay check
         if (formValues.retirementStatus === 'regular' && formValues.retirementRank === 'o4-plus') {
             if (formValues.militaryRetirementPay === 'yes') {
                 veteranDisqualifiers.push("O-4+ regular retirees receiving military pay are ineligible");
@@ -98,17 +113,18 @@ function checkEligibility() {
     const allReasons = [...veteranReasons, ...derivativeResult.derivativeReasons];
     const allDisqualifiers = [...veteranDisqualifiers, ...derivativeResult.derivativeDisqualifiers];
 
-    // Updated subgroup determination
+    // Subgroup determination
     let subgroup = 'B';
     const subgroupDetails = [];
     
     if (finalEligible) {
-        if (formValues.disabilityRating >= 30 || 
-            (formValues.retirementStatus === 'medical' && formValues.disabilityRating >= 30)) {
+        if (formValues.disabilityRating >= 30 && formValues.retirementStatus !== 'regular') {
             subgroup = 'AD';
-            subgroupDetails.push(formValues.retirementStatus === 'medical' ? 
-                "Medical Retiree with 30%+ Disability Rating" :
-                "30%+ Service-Connected Disability (5 U.S.C. 2108(3))");
+            subgroupDetails.push(
+                formValues.retirementStatus === 'medical' ? 
+                "Combat-Related Medical Retiree with 30%+ Disability" :
+                "30%+ Service-Connected Disability (5 U.S.C. 2108(3))"
+            );
         } else if (derivativeResult.isDerivativeEligible || formValues.campaignService !== 'none' || totalMonths >= 24) {
             subgroup = 'A';
             subgroupDetails.push(derivativeResult.isDerivativeEligible ? 
@@ -125,7 +141,7 @@ function checkEligibility() {
         <div class="subgroup-explanation subgroup-${subgroup}">
             <strong>Subgroup ${subgroup} Definition:</strong>
             ${subgroup === 'AD' ? 
-                'Veterans with 30%+ compensable disability (Highest Retention Priority)' :
+                'Combat-related medical retirees or non-retired 30%+ disabled veterans (Highest Retention Priority)' :
             subgroup === 'A' ? 
                 'Other preference eligibles (Including campaign veterans and derivative claims)' : 
                 'Non-preference eligibles'}
@@ -150,7 +166,7 @@ function checkEligibility() {
             <ul>
                 <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a></li>
                 <li><a href="https://www.ecfr.gov/current/title-5/chapter-I/subchapter-B/part-211" target="_blank">5 CFR 211.102</a></li>
-                ${formValues.derivativePreference !== 'none' ? '<li><a href="https://www.opm.gov/policy-data-oversight/workforce-restructuring/reductions-in-force/workforce_reshaping.pdf#page=23" target="_blank">OPM RIF Derivative Preference</a></li>' : ''}
+                ${formValues.medicalRetirementType === 'combat' ? '<li><a href="https://www.opm.gov/policy-data-oversight/workforce-restructuring/reductions-in-force/workforce_reshaping.pdf#page=23" target="_blank">OPM Combat-Related Medical Retirement</a></li>' : ''}
             </ul>
         </div>
     `;
