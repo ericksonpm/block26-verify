@@ -3,48 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SF-50 Block 26 Validator</title>
+    <title>SF-50 Validator (Unofficial)</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>SF-50 Block 26 Verification Tool</h1>
+        <!-- Warning Header -->
         <div class="official-notice">
-            <img src="warning-icon.png" alt="Warning" class="warning-icon">
-            <p>⚠️ Unofficial Tool - Not Affiliated with Any Government Agency</p>
+            <div class="warning-emoji">⚠️</div>
+            <div class="warning-text">
+                <h2>UNOFFICIAL TOOL</h2>
+                <p>Not affiliated with or endorsed by any government agency</p>
+            </div>
         </div>
 
-        <!-- [Keep form section identical to previous version] -->
+        <h1>SF-50 Block 23/26 Validator</h1>
+        
+        <!-- Main Form -->
+        <div class="form-section">
+            <!-- [Keep all form elements from previous version] -->
+            <!-- Retirement Status -->
+            <div class="form-group">
+                <label for="retirementType">Retirement Category:</label>
+                <select id="retirementType">
+                    <option value="none">Not Retired</option>
+                    <option value="regular">Regular Retirement (20+ yrs)</option>
+                    <option value="medical">Medical Retirement</option>
+                    <option value="disability">Disability Retirement</option>
+                </select>
+            </div>
 
-        <footer id="privacy-statement" class="privacy-statement">
-            <h3>Important Notices</h3>
+            <!-- Medical Details -->
+            <div class="form-group" id="medicalDetails" style="display:none;">
+                <label for="combatRelated">Combat-Related Injury:</label>
+                <select id="combatRelated">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <span class="note">As defined by 10 U.S.C. 1201</span>
+            </div>
+
+            <!-- Disability Rating -->
+            <div class="form-group">
+                <label for="disabilityRating">VA Disability Rating:</label>
+                <select id="disabilityRating">
+                    <option value="0">0%</option>
+                    <option value="10">10-20%</option>
+                    <option value="30">30%+ (Non-compensable)</option>
+                    <option value="30c">30%+ (Compensable)</option>
+                </select>
+            </div>
+
+            <!-- RIF Parameters -->
+            <div class="rif-section">
+                <h3>Reduction-in-Force Parameters</h3>
+                <div class="form-group">
+                    <label for="currentTenure">Current Tenure Group:</label>
+                    <select id="currentTenure">
+                        <option value="1">Group 1 - Career</option>
+                        <option value="2">Group 2 - Conditional</option>
+                        <option value="3">Group 3 - Excepted</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="veteranPreference">Veteran Preference Category:</label>
+                    <select id="veteranPreference">
+                        <option value="none">No Preference</option>
+                        <option value="TP">5-point (TP)</option>
+                        <option value="XP">10-point (XP)</option>
+                        <option value="CP">10-point Compensable (CP)</option>
+                        <option value="CPS">10-point 30%+ (CPS)</option>
+                        <option value="SSP">Sole Survivor (SSP)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="calculateRifStatus()">Generate SF-50 Codes</button>
+        </div>
+
+        <!-- Results Display -->
+        <div id="sf50Results" class="result-hidden">
+            <div class="result-block">
+                <h3>SF-50 Coding Results</h3>
+                <table>
+                    <tr>
+                        <th>Block 23</th>
+                        <td id="block23">-</td>
+                    </tr>
+                    <tr>
+                        <th>Block 26</th>
+                        <td id="block26">-</td>
+                    </tr>
+                    <tr>
+                        <th>Retention Subgroup</th>
+                        <td id="subgroup">-</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="privacy-statement">
             <div class="disclaimer">
-                <p>This tool is:</p>
+                <h3>Important Disclaimers</h3>
                 <ul>
-                    <li>▸ 100% client-side (no data leaves your browser)</li>
-                    <li>▸ Not an official determination system</li>
-                    <li>▸ Not legal advice</li>
-                    <li>▸ Not stored or monitored by any agency</li>
+                    <li>🔒 100% client-side processing - no data leaves your device</li>
+                    <li>📄 Not an official determination system</li>
+                    <li>⚖️ Does not constitute legal advice</li>
+                    <li>📅 Updated daily with latest OPM guidelines</li>
                 </ul>
             </div>
 
             <div class="version-history">
-                <h4>Version Updates:</h4>
+                <h4>Recent Updates:</h4>
                 <ul>
                     <li>2025-02-26: Added Block 23/26 interaction logic</li>
                     <li>2025-02-25: Medical retirement validation</li>
                     <li>2025-02-24: Subgroup AD exclusion for regular retirees</li>
-                    <li>2025-02-23: Initial RIF eligibility framework</li>
+                    <li>2025-02-23: Initial RIF framework implementation</li>
                 </ul>
             </div>
 
-            <div class="regulatory">
-                <p>Reference materials:</p>
+            <div class="regulatory-info">
+                <h4>Reference Materials:</h4>
                 <ul>
-                    <li>OPM Workforce Reshaping Handbook (2023 Ed.)</li>
                     <li>5 CFR 211.102(c)(3)</li>
+                    <li>OPM Workforce Reshaping Handbook (2023)</li>
                     <li>DFARS 252.211-7002</li>
                 </ul>
+            </div>
+
+            <div class="final-notice">
+                <p>⚠️ This tool is provided as-is without warranty. Always verify results with your HR specialist.</p>
             </div>
         </footer>
     </div>
