@@ -1,11 +1,10 @@
 /* Base Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 20px;
-    background: #f8f9fa;
-    color: #2c3e50;
+    background: #f0f0f0;
 }
 
 .container {
@@ -13,20 +12,13 @@ body {
     margin: 0 auto;
     background: white;
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-}
-
-/* Form Styles */
-.form-section {
-    background: #f1f3f5;
-    padding: 1.5rem;
     border-radius: 8px;
-    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
+/* Form Elements */
 .form-group {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
 label {
@@ -38,238 +30,56 @@ label {
 input, select {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid #dee2e6;
-    border-radius: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-input:focus, select:focus {
-    border-color: #3498db;
-    outline: none;
 }
 
 button {
-    width: 100%;
-    background: #3498db;
+    background: #007bff;
     color: white;
     border: none;
-    padding: 1rem;
-    border-radius: 6px;
-    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 1rem;
+    width: 100%;
 }
 
 button:hover {
-    background: #2980b9;
+    background: #0056b3;
 }
 
-/* Results Section */
-#result {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    border-radius: 8px;
-}
-
-.result-eligible {
-    background: #d4edda;
-    border: 2px solid #28a745;
-    color: #155724;
-}
-
-.result-ineligible {
-    background: #f8d7da;
-    border: 2px solid #dc3545;
-    color: #721c24;
-}
-
-.result-hidden {
-    display: none;
-}
-
-/* Retirement Conditional Fields */
-.retirement-conditional {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px dashed #dee2e6;
-}
-
-/* Legal References */
-.legal-reference {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid #dee2e6;
-}
-
-.legal-reference h2 {
-    font-size: 1.2rem;
-    color: #2c3e50;
-}
-
-.legal-reference ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.legal-reference li {
-    margin-bottom: 0.8rem;
-}
-
-.legal-reference a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-.legal-reference a:hover {
-    text-decoration: underline;
-}
-
-.note {
-    font-size: 0.85rem;
-    color: #6c757d;
-    margin-top: 0.4rem;
-    display: block;
-}
-
-/* Add this to your styles.css */
-input, select {
-    width: 100%; /* Ensure all inputs and selects take up the same width */
-    padding: 0.8rem;
-    border: 2px solid #dee2e6;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box; /* Include padding and border in width calculation */
-    transition: border-color 0.3s ease;
-}
-
-footer.privacy-statement {
+/* Results */
+#results {
     margin-top: 2rem;
     padding: 1.5rem;
     background: #f8f9fa;
-    border-top: 2px solid #dee2e6;
-    font-size: 0.9rem;
-    color: #495057;
+    border-radius: 6px;
 }
 
-footer.privacy-statement h3 {
-    font-size: 1.2rem;
-    color: #343a40;
-}
-
-footer.privacy-statement a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-footer.privacy-statement a:hover {
-    text-decoration: underline;
-}
-
-.privacy-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.privacy-link:hover {
-    text-decoration: underline;
-}
-
-/* Add these new styles */
-.derivative-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px dashed #dee2e6;
-}
-
-.derivative-section h3 {
-    color: #2c3e50;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-/* Keep all previous styles and add: */
-.privacy-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.privacy-link:hover {
-    text-decoration: underline;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-.subgroup-explanation {
-    padding: 15px;
-    border-radius: 5px;
-    margin: 15px 0;
-}
-
-.subgroup-AD {
-    background: #e3f2fd;
-    border: 2px solid #2196f3;
-}
-
-.subgroup-A {
-    background: #f0f4c3;
-    border: 2px solid #cddc39;
-}
-
-.subgroup-B {
-    background: #ffebee;
-    border: 2px solid #ff5252;
-}
-
-.subgroup-factors {
-    margin-top: 10px;
-    padding-left: 20px;
+.hidden {
+    display: none;
 }
 
 /* Warning Banner */
-.official-notice {
+.warning-banner {
     background: #fff3cd;
-    border-left: 4px solid #ffc107;
+    color: #856404;
     padding: 1rem;
-    margin: 1rem 0;
-    display: flex;
-    align-items: center;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
-.warning-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 1rem;
+/* Footer */
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: #666;
 }
 
-/* Version History */
-.version-history ul {
-    list-style: none;
-    padding-left: 1rem;
-}
-
-.version-history li::before {
-    content: "▹";
-    color: #3498db;
-    margin-right: 0.5rem;
-}
-
-.regulatory ul {
-    columns: 2;
-}
-
-/* Add rank group styling */
-#rankGroup {
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dashed #ddd;
+.disclaimer {
+    font-size: 0.9rem;
+    color: #dc3545;
 }
