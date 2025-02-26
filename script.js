@@ -26,8 +26,8 @@ function checkDerivativeEligibility(formValues) {
 
         switch(derivativeType) {
             case 'widow':
-                if (!['gulf-war', 'post-911'].includes(servicePeriod)) {
-                    disqualifiers.push("Veteran must have served in Gulf War or Post-9/11 campaign");
+                if (servicePeriod === 'none') {
+                    disqualifiers.push("Veteran must have served in a qualifying campaign");
                 } else {
                     reasons.push("Unmarried widow/widower of campaign veteran");
                 }
@@ -82,10 +82,9 @@ function checkEligibility() {
             isVeteranEligible = true;
         }
 
-        // Updated O-4+ check with medical retirement exception
-        if (formValues.retirementStatus === 'regular' && formValues.retirementRank === 'o4-plus') {
+        if (formValues.retirementRank === 'o4-plus') {
             if (formValues.militaryRetirementPay === 'yes') {
-                veteranDisqualifiers.push("O-4+ regular retirees receiving military pay are ineligible");
+                veteranDisqualifiers.push("O-4+ retirees receiving military pay are ineligible");
                 isVeteranEligible = false;
             }
         }
@@ -98,17 +97,14 @@ function checkEligibility() {
     const allReasons = [...veteranReasons, ...derivativeResult.derivativeReasons];
     const allDisqualifiers = [...veteranDisqualifiers, ...derivativeResult.derivativeDisqualifiers];
 
-    // Updated subgroup determination
+    // Determine Subgroup
     let subgroup = 'B';
     const subgroupDetails = [];
     
     if (finalEligible) {
-        if (formValues.disabilityRating >= 30 || 
-            (formValues.retirementStatus === 'medical' && formValues.disabilityRating >= 30)) {
+        if (formValues.disabilityRating >= 30) {
             subgroup = 'AD';
-            subgroupDetails.push(formValues.retirementStatus === 'medical' ? 
-                "Medical Retiree with 30%+ Disability Rating" :
-                "30%+ Service-Connected Disability (5 U.S.C. 2108(3))");
+            subgroupDetails.push("30%+ Service-Connected Disability (5 U.S.C. 2108(3))");
         } else if (derivativeResult.isDerivativeEligible || formValues.campaignService !== 'none' || totalMonths >= 24) {
             subgroup = 'A';
             subgroupDetails.push(derivativeResult.isDerivativeEligible ? 
@@ -149,7 +145,6 @@ function checkEligibility() {
             <h4>Legal References:</h4>
             <ul>
                 <li><a href="https://www.law.cornell.edu/uscode/text/5/2108" target="_blank">5 U.S.C. 2108</a></li>
-                <li><a href="https://www.ecfr.gov/current/title-5/chapter-I/subchapter-B/part-211" target="_blank">5 CFR 211.102</a></li>
                 ${formValues.derivativePreference !== 'none' ? '<li><a href="https://www.opm.gov/policy-data-oversight/workforce-restructuring/reductions-in-force/workforce_reshaping.pdf#page=23" target="_blank">OPM RIF Derivative Preference</a></li>' : ''}
             </ul>
         </div>
