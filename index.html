@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF-50 RIF Analysis Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>SF-50 RIF Analysis Tool</h1>
+            <p class="subtitle">Understanding Your Federal Reduction in Force (RIF) Protection</p>
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This tool provides general guidance only and is not legal advice. 
+                Always verify information with your HR office. Results are estimates based on standard RIF procedures.
+            </div>
+        </header>
+
+        <!-- Main Input Form -->
+        <section class="input-section">
+            <div class="card">
+                <div class="card__body">
+                    <h2>Enter Your SF-50 Information</h2>
+                    <form id="rifAnalysisForm">
+                        <!-- Block 23 -->
+                        <div class="form-group">
+                            <label class="form-label" for="block23">
+                                Block 23 - Veterans Preference Code
+                                <span class="help-text">Found in box 23 of your SF-50</span>
+                            </label>
+                            <select id="block23" class="form-control" required>
+                                <option value="">Select your code</option>
+                                <option value="1">1 - No Veterans Preference</option>
+                                <option value="2">2 - 5-point preference (TP)</option>
+                                <option value="3">3 - 10-point/disability (XP)</option>
+                                <option value="4">4 - 10-point/compensable (CP)</option>
+                                <option value="5">5 - 10-point/other (XP)</option>
+                                <option value="6">6 - 10-point compensable/30%+ (CPS)</option>
+                                <option value="7">7 - Sole Survivorship Preference (SSP)</option>
+                                <option value="unknown">I don't know / Not sure</option>
+                            </select>
+                        </div>
+
+                        <!-- Block 24 -->
+                        <div class="form-group">
+                            <label class="form-label" for="block24">
+                                Block 24 - Tenure Code
+                                <span class="help-text">Your employment type</span>
+                            </label>
+                            <select id="block24" class="form-control" required>
+                                <option value="">Select your tenure</option>
+                                <option value="1">1 - Career (3+ years service)</option>
+                                <option value="2">2 - Career-conditional (less than 3 years)</option>
+                                <option value="3">3 - Temporary/term/time-limited</option>
+                                <option value="unknown">I don't know / Not sure</option>
+                            </select>
+                        </div>
+
+                        <!-- Block 26 -->
+                        <div class="form-group">
+                            <label class="form-label" for="block26">
+                                Block 26 - Veterans Preference for RIF
+                                <span class="help-text">Is this box checked on your SF-50?</span>
+                            </label>
+                            <select id="block26" class="form-control" required>
+                                <option value="">Select option</option>
+                                <option value="yes">Yes - Box is checked</option>
+                                <option value="no">No - Box is not checked</option>
+                                <option value="unknown">I don't know / Not sure</option>
+                            </select>
+                        </div>
+
+                        <!-- Military Service Questions -->
+                        <fieldset class="military-section">
+                            <legend>Military Service Information</legend>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="militaryRetiree">
+                                    Are you a military retiree?
+                                </label>
+                                <select id="militaryRetiree" class="form-control">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+
+                            <div id="militaryDetails" class="military-details hidden">
+                                <div class="form-group">
+                                    <label class="form-label" for="militaryYears">
+                                        Did you serve 20 or more years in the military?
+                                    </label>
+                                    <select id="militaryYears" class="form-control">
+                                        <option value="no">No (less than 20 years)</option>
+                                        <option value="yes">Yes (20+ years)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="retirementType">
+                                        What type of military retirement do you have?
+                                    </label>
+                                    <select id="retirementType" class="form-control">
+                                        <option value="regular">Regular retirement</option>
+                                        <option value="combat">Combat-related retirement</option>
+                                        <option value="medical">Medical retirement</option>
+                                        <option value="unsure">Not sure</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="vaDisability">
+                                    Do you have a VA disability rating?
+                                </label>
+                                <select id="vaDisability" class="form-control">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+
+                            <div id="vaRatingDetails" class="va-details hidden">
+                                <div class="form-group">
+                                    <label class="form-label" for="vaRating">
+                                        What is your VA disability rating?
+                                    </label>
+                                    <select id="vaRating" class="form-control">
+                                        <option value="0-10">0-10%</option>
+                                        <option value="20">20%</option>
+                                        <option value="30">30%</option>
+                                        <option value="40">40%</option>
+                                        <option value="50">50%</option>
+                                        <option value="60">60%</option>
+                                        <option value="70">70%</option>
+                                        <option value="80">80%</option>
+                                        <option value="90">90%</option>
+                                        <option value="100">100%</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <button type="submit" class="btn btn--primary btn--lg btn--full-width">
+                            Analyze My RIF Standing
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Results -->
+        <section id="analysisResults" class="results-section hidden">
+            <div class="card">
+                <div class="card__body">
+                    <h2>Your RIF Analysis Results</h2>
+                    <div id="resultsContent">
+                        <!-- Results will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What-If Scenarios -->
+        <section class="what-if-section">
+            <div class="card">
+                <div class="card__body">
+                    <h2>What-If Scenarios</h2>
+                    <p>Explore how different situations might affect your RIF standing:</p>
+                    <div class="scenario-buttons">
+                        <button class="btn btn--secondary" onclick="runWhatIfScenario('tenure-change')">
+                            What if I had different tenure?
+                        </button>
+                        <button class="btn btn--secondary" onclick="runWhatIfScenario('veterans-pref')">
+                            What if I had veterans preference?
+                        </button>
+                        <button class="btn btn--secondary" onclick="runWhatIfScenario('disability-rating')">
+                            What if I had 30%+ disability?
+                        </button>
+                    </div>
+                    <div id="whatIfResults" class="what-if-results hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Content -->
+        <section class="educational-section">
+            <div class="card">
+                <div class="card__body">
+                    <h2>Understanding RIF Procedures</h2>
+                    
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion('rif-basics')">
+                                <span>What is a Reduction in Force (RIF)?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div id="rif-basics" class="accordion-content hidden">
+                                <p>A RIF is when a federal agency must eliminate positions due to reorganization, lack of work, shortage of funds, or other reasons. It's the federal government's version of layoffs.</p>
+                                <p>During a RIF, employees are ranked and those with the lowest rankings may be separated, demoted, or furloughed.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion('rif-ranking')">
+                                <span>How are employees ranked in a RIF?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div id="rif-ranking" class="accordion-content hidden">
+                                <p>Employees are ranked by four factors in this order:</p>
+                                <ol>
+                                    <li><strong>Tenure Group:</strong> Career (Group I), Career-conditional (Group II), or Temporary (Group III)</li>
+                                    <li><strong>Veterans Preference:</strong> Subgroup AD (30%+ disabled), A (other preference), or B (no preference)</li>
+                                    <li><strong>Length of Service:</strong> Total creditable federal service</li>
+                                    <li><strong>Performance Ratings:</strong> Most recent performance appraisals</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion('military-rules')">
+                                <span>Special Rules for Military Retirees</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div id="military-rules" class="accordion-content hidden">
+                                <p>The Dual Compensation Act of 1964 restricts RIF veterans preference for military retirees with 20+ years of service.</p>
+                                <p><strong>Exceptions include:</strong></p>
+                                <ul>
+                                    <li>Combat-related retirement (regardless of years served)</li>
+                                    <li>Medical retirement with less than 20 years of service</li>
+                                    <li>Continuous federal employment since November 30, 1964</li>
+                                </ul>
+                                <p><strong>Important:</strong> Many SF-50s incorrectly show veterans preference for 20+ year retirees. Verify with your HR office.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion('next-steps')">
+                                <span>What to do if your SF-50 has errors</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div id="next-steps" class="accordion-content hidden">
+                                <p>If you believe your SF-50 contains errors:</p>
+                                <ol>
+                                    <li>Contact your HR office immediately</li>
+                                    <li>Provide documentation of your military service</li>
+                                    <li>Request correction before any RIF procedures begin</li>
+                                    <li>Keep copies of all correspondence</li>
+                                </ol>
+                                <p><strong>Note:</strong> Corrections are easier to make before a RIF is announced.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="card">
+                <div class="card__body">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <h3>Why don't 20-year military retirees get veterans preference in RIF?</h3>
+                            <p>The Dual Compensation Act of 1964 restricts RIF veterans preference for military retirees with 20+ years unless their retirement was combat-related or they meet other specific exceptions.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>What does "compensable disability" mean?</h3>
+                            <p>This refers to a service-connected disability for which the veteran receives compensation from the VA. The percentage rating determines RIF subgroup placement.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>Can I appeal my RIF ranking?</h3>
+                            <p>Yes, you have the right to appeal. Contact your union representative or an employment attorney for guidance on the appeal process.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>This tool is for informational purposes only. Always consult with your HR office for official guidance.</p>
+            <p>Created to help federal employees understand RIF procedures • Not affiliated with any government agency</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
